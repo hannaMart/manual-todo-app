@@ -1,24 +1,15 @@
-import { useEffect, useState } from "react";
+import TodosCardManual from "./components/TodosCardManual";
 
-function App() {
-  const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos?_limit=5")
-      .then((res) => res.json())
-      .then((data) => setTodos(data));
-  }, []);
-
+export default function App() {
   return (
-    <>
-      <h1>Todo app</h1>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
+    <div>
+      <h2>Experiment 1a — manual (10 components)</h2>
+
+      <div className="cards">
+        {Array.from({ length: 10 }).map((_, i) => (
+          <TodosCardManual key={i} index={i + 1} />
         ))}
-      </ul>
-    </>
+      </div>
+    </div>
   );
 }
-
-export default App;
