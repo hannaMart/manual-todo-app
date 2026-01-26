@@ -4,7 +4,7 @@
 }
 
 body {
-  margin: 0;
+  margin: 20px;
   min-width: 320px;
 }
 
@@ -26,3 +26,53 @@ body {
 .card h3 {
   margin: 0;
 }
+
+.experiments-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.exp-btn {
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 14, 14);
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+  background-color: beige;
+}
+
+.exp2 {
+  max-width: 700px;
+}
+
+.exp2__title {
+  margin-bottom: 12px;
+}
+
+.exp2__desc {
+  margin-bottom: 16px;
+}
+
+.exp2__list {
+  list-style: disc;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.exp2__list li {
+  margin-bottom: 6px;
+}
+
+.exp2__back {
+  display: inline-block;
+  margin-top: 12px;
+}
+
+
+
+
+
