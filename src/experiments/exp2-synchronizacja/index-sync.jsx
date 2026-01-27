@@ -17,7 +17,7 @@ export default function Exp2Synchronizacja() {
           <Link to="/exp2/background">Background refetch</Link>
         </li>
         <li>
-          <Link to="/exp2/error">Error handling</Link>
+          <Link to="/exp2/errors">Error handling</Link>
         </li>
       </ul>
 
