@@ -26,13 +26,21 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
+
+
 import Exp2 from "./experiments/exp2-synchronizacja/index-sync.jsx";
+
 import Exp2RaceIndex from "./experiments/exp2-synchronizacja/race/index-race.jsx";
 import Exp2Race from "./experiments/exp2-synchronizacja/race/exp2-race";
 import Exp2RaceFixed from "./experiments/exp2-synchronizacja/race/exp2-race-fixed";
+
 import Exp2BackIndex from "./experiments/exp2-synchronizacja/background/index-back.jsx";
 import Exp2Back from "./experiments/exp2-synchronizacja/background/exp2-background.jsx";
 import Exp2BackVisibility from "./experiments/exp2-synchronizacja/background/exp2-background-visibility.jsx";
+import Exp2BackVisibilityDelayed from "./experiments/exp2-synchronizacja/background/exp2-background-visibility-delayed.jsx";
+import Exp2BackVisibilityDelayedProblem from "./experiments/exp2-synchronizacja/background/exp2-background-visibility-delayed-problem.jsx";
+import Exp2BackVisibilityDelayedPredictability from "./experiments/exp2-synchronizacja/background/exp2-background-visibility-delayed-predictability.jsx";
+
 import Exp2ErrorsIndex from "./experiments/exp2-synchronizacja/errors/index-errors.jsx";
 import Exp2Errors from "./experiments/exp2-synchronizacja/errors/exp2-errors";
 import Exp2ErrorsFixed from "./experiments/exp2-synchronizacja/errors/exp2-errors-fixed";
@@ -42,13 +50,19 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+
       <Route path="/exp2" element={<Exp2 />} />
       <Route path="/exp2/race" element={<Exp2RaceIndex />} />
       <Route path="/exp2/race/base" element={<Exp2Race />} />
       <Route path="/exp2/race/fixed" element={<Exp2RaceFixed />} />
+
       <Route path="/exp2/background" element={<Exp2BackIndex />} />
       <Route path="/exp2/background/base" element={<Exp2Back />} />
       <Route path="/exp2/background/visibility" element={<Exp2BackVisibility />} />
+      <Route path="/exp2/background/visibility-delayed" element={<Exp2BackVisibilityDelayed />} />
+      <Route path="/exp2/background/visibility-delayed-problem" element={<Exp2BackVisibilityDelayedProblem />} />
+      <Route path="/exp2/background/visibility-delayed-predictability" element={<Exp2BackVisibilityDelayedPredictability />} />
+
       <Route path="/exp2/errors" element={<Exp2ErrorsIndex />}/>
       <Route path="/exp2/errors/base" element={<Exp2Errors />} />
       <Route path="/exp2/errors/fixed" element={<Exp2ErrorsFixed />} />
