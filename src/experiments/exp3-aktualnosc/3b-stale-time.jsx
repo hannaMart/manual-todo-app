@@ -12,103 +12,48 @@ import { fakeFetch } from "./fakeFetch";
  *   Сравнение получается: 3a (без TTL) vs 3b (с TTL). Это и демонстрирует "действий больше" в manual.
  */
 
-const STALE_TIME_MS = 60_000; // 60s — аналог staleTime=60000 в React Query
+const STALE_TIME_MS = 60000;
 
-// Простейший "кеш" на уровне модуля (живет между mount/unmount этого компонента)
 let cachedData = null;
 let cachedAt = 0;
 
 export default function Exp3bStaleTimeManual() {
   const [data, setData] = useState(null);
-  const [source, setSource] = useState("—"); // "cache" или "fetch"
-  const [status, setStatus] = useState("idle"); // idle | loading | success | error
-
-  // чтобы избежать setState после unmount
-  const cancelledRef = useRef(false);
+  const [source, setSource] = useState(""); // cache / fetch
 
   useEffect(() => {
-    cancelledRef.current = false;
+    const now = Date.now();
 
-    async function load() {
-      try {
-        setStatus("loading");
-
-        const now = Date.now();
-        const isFresh =
-          cachedData !== null && now - cachedAt < STALE_TIME_MS;
-
-        if (isFresh) {
-          // берём из кеша — запрос НЕ делаем
-          if (!cancelledRef.current) {
-            setData(cachedData);
-            setSource("cache (fresh)");
-            setStatus("success");
-          }
-          return;
-        }
-
-        // данные stale или кеш пуст — делаем запрос
-        const result = await fakeFetch();
-
-        // обновляем кеш
-        cachedData = result;
-        cachedAt = Date.now();
-
-        if (!cancelledRef.current) {
-          setData(result);
-          setSource("fetch (cache updated)");
-          setStatus("success");
-        }
-      } catch (e) {
-        if (!cancelledRef.current) {
-          setStatus("error");
-        }
-      }
+    if (cachedData && now - cachedAt < STALE_TIME_MS) {
+      setData(cachedData);
+      setSource("cache");
+      return;
     }
 
-    load();
+    fakeFetch().then((result) => {
+      cachedData = result;
+      cachedAt = Date.now();
+      setData(result);
+      setSource("fetch");
+    });
+  }, []);
 
-    return () => {
-      cancelledRef.current = true;
-    };
-  }, []); // только mount (как в 3a), но с TTL-логикой перед fetch
+  if (!data) return <p>Loading…</p>;
 
   return (
     <div>
-      <h2>PB3 – 3b – Manual (staleTime / TTL)</h2>
+      <h2>PB3 – 3b – Manual</h2>
 
-      <p>
-        <strong>STALE_TIME_MS:</strong> {STALE_TIME_MS} ms
-      </p>
-      <p>
-        <strong>Status:</strong> {status}
-      </p>
-      <p>
-        <strong>Source:</strong> {source}
-      </p>
+      <p><strong>Source:</strong> {source}</p>
+      <p><strong>Fetched at:</strong> {data.fetchedAt}</p>
+      <p><strong>Request ID:</strong> {data.requestId}</p>
 
-      {!data && status === "loading" && <p>Loading…</p>}
-      {status === "error" && <p>Error</p>}
-
-      {data && (
-        <div>
-          <p>
-            <strong>Fetched at:</strong> {data.fetchedAt}
-          </p>
-          <p>
-            <strong>Request ID:</strong> {data.requestId}
-          </p>
-
-          <p>
-            <strong>Todos:</strong>
-          </p>
-          <ul>
-            {data.todos.map((t) => (
-              <li key={t.id}>{t.todoName}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <p><strong>Todos:</strong></p>
+      <ul>
+        {data.todos.map((t) => (
+          <li key={t.id}>{t.todoName}</li>
+        ))}
+      </ul>
     </div>
   );
 }
