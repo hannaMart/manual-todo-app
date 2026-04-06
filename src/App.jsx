@@ -50,8 +50,21 @@ import Exp2ErrorsLoading from "./experiments/exp2-synchronizacja/errors/exp2-err
 import Exp3 from "./experiments/exp3-aktualnosc/index-exp3.jsx";
 import Exp3NoFreshness from "./experiments/exp3-aktualnosc/3a-no-freshness.jsx";
 import Exp3StaleTime from "./experiments/exp3-aktualnosc/3b-stale-time.jsx";
-
 import Exp3ReturnAfterBreak from "./experiments/exp3-aktualnosc/3c-return-after-break/after-break.jsx";
+
+// ===================== EXP4 =====================
+import Exp4 from "./experiments/exp4-mutacje/index-exp4.jsx";
+
+import Exp4AddIndex from "./experiments/exp4-mutacje/add/index-add.jsx";
+import Exp4AddRefetch from "./experiments/exp4-mutacje/add/add-refetch.jsx";
+import Exp4AddSetstate from "./experiments/exp4-mutacje/add/add-setstate.jsx";
+
+import Exp4DeleteIndex from "./experiments/exp4-mutacje/delete/index-delete.jsx";
+import Exp4DeleteRefetch from "./experiments/exp4-mutacje/delete/delete-refetch.jsx";
+import Exp4DeleteSetstate from "./experiments/exp4-mutacje/delete/delete-setstate.jsx";
+
+import Exp4SyncManual from "./experiments/exp4-mutacje/sync/sync-manual.jsx";
+
 
 export default function App() {
   return (
@@ -95,10 +108,21 @@ export default function App() {
       {/* 3c */}
       <Route path="/exp3/return-after-break" element={<Exp3ReturnAfterBreak />} />
 
+      {/* ===== EXP4 ===== */}
+      <Route path="/exp4" element={<Exp4 />} />
 
+      <Route path="/exp4/add" element={<Exp4AddIndex />} />
+      <Route path="/exp4/add/refetch" element={<Exp4AddRefetch />} />
+      <Route path="/exp4/add/setstate" element={<Exp4AddSetstate />} />
+
+      <Route path="/exp4/delete" element={<Exp4DeleteIndex />} />
+      <Route path="/exp4/delete/refetch" element={<Exp4DeleteRefetch />} />
+      <Route path="/exp4/delete/setstate" element={<Exp4DeleteSetstate />} />
+
+      <Route path="/exp4/sync" element={<Exp4SyncManual />} />
+      
       {/* placeholders */}
       <Route path="/exp1" element={<div className="exp-btn">Exp1 — позже</div>} />
-      <Route path="/exp4" element={<div className="page">Exp4 — позже</div>} />
       <Route path="/exp5" element={<div className="page">Exp5 — позже</div>} />
       <Route path="/exp6" element={<div className="page">Exp6 — позже</div>} />
 
