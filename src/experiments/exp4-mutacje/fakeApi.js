@@ -14,36 +14,23 @@ function wait(ms) {
 export function resetFakeTodos() {
   todosDb = [...INITIAL_TODOS];
   requestCounter = 0;
-  console.log("[PB4] fake DB reset");
 }
 
 export async function fakeFetchTodos({ delay = 600 } = {}) {
   const requestId = ++requestCounter;
-  const startedAt = Date.now();
-
-  console.log(`[PB4][GET] request #${requestId} START (delay=${delay}ms)`);
+  console.log(`[GET] #${requestId}`);
 
   await wait(delay);
 
-  const fetchedAt = new Date().toISOString();
-  const tookMs = Date.now() - startedAt;
-
-  console.log(
-    `[PB4][GET] request #${requestId} END (+${tookMs}ms) fetchedAt=${fetchedAt}`
-  );
-
   return {
     requestId,
-    fetchedAt,
     todos: [...todosDb],
   };
 }
 
 export async function fakeAddTodo(todoName, { delay = 600 } = {}) {
   const requestId = ++requestCounter;
-  const startedAt = Date.now();
-
-  console.log(`[PB4][POST] request #${requestId} START (delay=${delay}ms)`);
+  console.log(`[POST] #${requestId}`);
 
   await wait(delay);
 
@@ -54,12 +41,6 @@ export async function fakeAddTodo(todoName, { delay = 600 } = {}) {
 
   todosDb = [...todosDb, newTodo];
 
-  const tookMs = Date.now() - startedAt;
-
-  console.log(
-    `[PB4][POST] request #${requestId} END (+${tookMs}ms) added id=${newTodo.id}`
-  );
-
   return {
     requestId,
     todo: newTodo,
@@ -68,19 +49,11 @@ export async function fakeAddTodo(todoName, { delay = 600 } = {}) {
 
 export async function fakeDeleteTodo(id, { delay = 600 } = {}) {
   const requestId = ++requestCounter;
-  const startedAt = Date.now();
-
-  console.log(`[PB4][DELETE] request #${requestId} START (delay=${delay}ms)`);
+  console.log(`[DELETE] #${requestId}`);
 
   await wait(delay);
 
   todosDb = todosDb.filter((todo) => todo.id !== id);
-
-  const tookMs = Date.now() - startedAt;
-
-  console.log(
-    `[PB4][DELETE] request #${requestId} END (+${tookMs}ms) deleted id=${id}`
-  );
 
   return {
     requestId,
