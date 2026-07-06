@@ -72,6 +72,18 @@ import Exp5ParamChange from "./experiments/exp5-parametry/param-change";
 import Exp5ParamFastChange from "./experiments/exp5-parametry/param-fast-change";
 import Exp5ParamCache from "./experiments/exp5-parametry/param-cache";
 
+// ===================== EXP6 =====================
+import Exp6Koordynacja from "./experiments/exp6-koordynacja/index-exp6.jsx";
+import Exp6RepresentationsIndex from "./experiments/exp6-koordynacja/representations/index-representations.jsx";
+import Exp6WspoldzielenieIndex from "./experiments/exp6-koordynacja/shared/index-shared.jsx";
+import Exp6AktualizacjaIndex from "./experiments/exp6-koordynacja/update/index-update.jsx";
+import Exp6SharedProps from "./experiments/exp6-koordynacja/shared/shared-props.jsx";
+import Exp6SharedContext from "./experiments/exp6-koordynacja/shared/shared-context.jsx";
+import Exp6RepresentationsProps from "./experiments/exp6-koordynacja/representations/representations-props.jsx";
+import Exp6RepresentationsContext from "./experiments/exp6-koordynacja/representations/representations-context.jsx";
+import Exp6UpdateProps from "./experiments/exp6-koordynacja/update/update-props.jsx";
+import Exp6UpdateContext from "./experiments/exp6-koordynacja/update/update-context.jsx";
+
 export default function App() {
   return (
     <Routes>
@@ -137,20 +149,40 @@ export default function App() {
       <Route path="/exp4/sync" element={<Exp4SyncManual />} />
 
       
-      {/* ===== EXP4 ===== */}
+      {/* ===== EXP5 ===== */}
 
       <Route path="/exp5" element={<Exp5Parametry />} />
       <Route path="/exp5/param-change" element={<Exp5ParamChange />} />
       <Route path="/exp5/param-fast-change" element={<Exp5ParamFastChange />} />
       <Route path="/exp5/param-cache" element={<Exp5ParamCache />} />
 
+
+    
+      {/* ===== EXP6 ===== */}
+      <Route path="/exp6" element={<Exp6Koordynacja />}/>
+
+      <Route path="/exp6/shared" element={<Exp6WspoldzielenieIndex />}/>
+      <Route path="/exp6/shared/shared-props" element={<Exp6SharedProps />}/>
+      <Route path="/exp6/shared/shared-context" element={<Exp6SharedContext />}/>
+
+      <Route path="/exp6/representations" element={<Exp6RepresentationsIndex />}/>
+      <Route path="/exp6/representations/representations-props" element={<Exp6RepresentationsProps />}/>
+      <Route path="/exp6/representations/representations-context" element={<Exp6RepresentationsContext />}/>
+
+      <Route path="/exp6/update" element={<Exp6AktualizacjaIndex />}/>
+      <Route path="/exp6/update/update-props" element={<Exp6UpdateProps />}/>
+      <Route path="/exp6/update/update-context" element={<Exp6UpdateContext />}/>
+
+
+
       {/* placeholders */}
+
       <Route
         path="/exp1"
         element={<div className="exp-btn">Exp1 — позже</div>}
       />
-      <Route path="/exp5" element={<div className="page">Exp5 — позже</div>} />
-      <Route path="/exp6" element={<div className="page">Exp6 — позже</div>} />
+
+
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
