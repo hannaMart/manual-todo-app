@@ -7,7 +7,7 @@ export default function Exp3Aktualnosc() {
 
       <p className="exp3__desc">
         Эксперимент посвящён исследованию механизмов контроля актуальности
-        server-state и их влияния на частоту повторных HTTP-запросов
+        server-state и их влияния на поведение повторных HTTP-запросов
         в React-приложении.
       </p>
 
@@ -19,14 +19,14 @@ export default function Exp3Aktualnosc() {
         </li>
 
         <li>
-          <Link to="/exp3/stale-time">
-            3b — Введение контроля актуальности данных на основе времени
+          <Link to="/exp3/page-return">
+            3b — Введение контроля актуальности данных на основе времени при повторном открытии страницы
           </Link>
         </li>
 
         <li>
-          <Link to="/exp3/return-after-break">
-            3c — Поведение при возврате к представлению после перерыва
+          <Link to="/exp3/tab-return">
+            3c — Поведение при возврате к представлению после перерыва при возврате на вкладку
           </Link>
         </li>
       </ul>

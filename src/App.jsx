@@ -49,8 +49,8 @@ import Exp2ErrorsLoading from "./experiments/exp2-synchronizacja/errors/exp2-err
 // ===================== EXP3 =====================
 import Exp3 from "./experiments/exp3-aktualnosc/index-exp3.jsx";
 import Exp3NoFreshness from "./experiments/exp3-aktualnosc/3a-no-freshness.jsx";
-import Exp3StaleTime from "./experiments/exp3-aktualnosc/3b-stale-time.jsx";
-import Exp3ReturnAfterBreak from "./experiments/exp3-aktualnosc/3c-return-after-break/after-break.jsx";
+import Exp3StaleTime from "./experiments/exp3-aktualnosc/3b-page-return.jsx";
+import Exp3ReturnAfterBreak from "./experiments/exp3-aktualnosc/3c-tab-return.jsx";
 
 // ===================== EXP4 =====================
 import Exp4 from "./experiments/exp4-mutacje/index-exp4.jsx";
@@ -127,11 +127,11 @@ export default function App() {
       <Route path="/exp3/no-freshness" element={<Exp3NoFreshness />} />
 
       {/* 3b */}
-      <Route path="/exp3/stale-time" element={<Exp3StaleTime />} />
+      <Route path="/exp3/page-return" element={<Exp3StaleTime />} />
 
       {/* 3c */}
       <Route
-        path="/exp3/return-after-break"
+        path="/exp3/tab-return"
         element={<Exp3ReturnAfterBreak />}
       />
 

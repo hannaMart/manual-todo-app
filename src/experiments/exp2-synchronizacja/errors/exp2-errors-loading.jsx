@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { simulateFetchTodos } from "./forErrAPI";
+import { simulateFetchTodos } from "../../../fakeServer/fakeAPI";
 
 export default function Exp2ErrorsLoading() {
   const [fail1, setFail1] = useState(false);
@@ -93,7 +93,7 @@ export default function Exp2ErrorsLoading() {
       {data1 && (
         <ul>
           {data1.map((t) => (
-            <li key={t.id}>{t.todoName}</li>
+            <li key={t.id}>{t.title}</li>
           ))}
         </ul>
       )}
@@ -114,7 +114,7 @@ export default function Exp2ErrorsLoading() {
       {status2 === "success" && data2 && (
         <ul>
           {data2.map((t) => (
-            <li key={t.id}>{t.todoName}</li>
+            <li key={t.id}>{t.title}</li>
           ))}
         </ul>
       )}

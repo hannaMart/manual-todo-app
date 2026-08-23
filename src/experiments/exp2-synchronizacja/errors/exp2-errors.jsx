@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { simulateFetchTodos } from "./forErrAPI";
+import { simulateFetchTodos } from "../../../fakeServer/fakeAPI";
 
 export default function Exp2ErrorsBugged() {
   const [isFailure, setIsFailure] = useState(false);
@@ -52,7 +52,7 @@ export default function Exp2ErrorsBugged() {
       {data && (
         <ul>
           {data.map((t) => (
-            <li key={t.id}>{t.todoName}</li>
+            <li key={t.id}>{t.t}</li>
           ))}
         </ul>
       )}

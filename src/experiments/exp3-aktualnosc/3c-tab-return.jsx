@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { fakeFetch } from "../fakeFetch";
+import { fakeFetchStale } from "../../../fakeServer/fakeAPI";
 
 const STALE_TIME_MS = 60000;
 
@@ -14,29 +14,48 @@ async function getDataWithFreshness() {
     return { data: cachedData, source: "cache (fresh)" };
   }
 
-  const result = await fakeFetch();
+  const result = await fakeFetchStale();
+
   cachedData = result;
   cachedAt = Date.now();
 
   return { data: result, source: "fetch (stale → updated)" };
 }
 
-export default function Exp3ReturnLong() {
+export default function Exp3TabReturn() {
   const [data, setData] = useState(null);
   const [source, setSource] = useState("");
 
   useEffect(() => {
-    getDataWithFreshness().then(({ data, source }) => {
-      setData(data);
-      setSource(source);
-    });
+    const loadData = () => {
+      getDataWithFreshness().then(({ data, source }) => {
+        setData(data);
+        setSource(source);
+      });
+    };
+
+    // pierwszy mount
+    loadData();
+
+    // powrót do karty przeglądarki
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        loadData();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   if (!data) return <p>Loading…</p>;
 
   return (
     <div className="page">
-      <h2>PB3 – 3c – Возврат после длинной паузы</h2>
+      <h2>PB3 – 3c – Актуальность при возврате на вкладку</h2>
 
       <p><strong>Source:</strong> {source}</p>
       <p><strong>Fetched at:</strong> {data.fetchedAt}</p>
@@ -45,14 +64,11 @@ export default function Exp3ReturnLong() {
       <p><strong>Todos:</strong></p>
       <ul>
         {data.todos.map((t) => (
-          <li key={t.id}>{t.todoName}</li>
+          <li key={t.id}>{t.title}</li>
         ))}
       </ul>
 
-      <br />
-      <Link to="/exp3">
-        ← Назад к выбору паузы
-      </Link>
+      <Link to="/exp3">← Powrót</Link>
     </div>
   );
 }

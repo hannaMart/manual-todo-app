@@ -1,19 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { fakeFetchTodosRace } from "../../../fakeServer/fakeAPI";
 
-function fakeFetchTodos(filter) {
-  const delay = Math.random() * 2000 + 300;
-
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        filter,
-        items: [`Todo A (${filter})`, `Todo B (${filter})`],
-        delay: Math.round(delay),
-      });
-    }, delay);
-  });
-}
 
 export default function Exp2Race() {
   const [filter, setFilter] = useState("all");
@@ -32,7 +20,7 @@ export default function Exp2Race() {
     const current = ++latestRequest.current;
     setLoading(true);
 
-    fakeFetchTodos(filter).then((result) => {
+    fakeFetchTodosRace(filter).then((result) => {
       if (current !== latestRequest.current) return;
 
       setData(result);
@@ -63,7 +51,7 @@ export default function Exp2Race() {
           </p>
           <ul>
             {data.items.map((item) => (
-              <li key={item}>{item}</li>
+              <li key={item.id}>{item.title}</li>
             ))}
           </ul>
         </div>

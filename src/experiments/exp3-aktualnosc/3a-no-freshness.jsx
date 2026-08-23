@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { fakeFetch } from "./fakeFetch"; 
-// если файл у тебя называется иначе, поменяй на: "./fakeFetch" или как у тебя реально
+import { fakeFetchNoFresh } from "../../fakeServer/fakeAPI";
+import { Link } from "react-router-dom";
+
 
 export default function Exp3NoFreshness() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fakeFetch().then((result) => {
+    fakeFetchNoFresh().then((result) => {
       setData(result);
     });
   }, []); // только mount
@@ -25,11 +26,13 @@ export default function Exp3NoFreshness() {
           <p><strong>Todos:</strong></p>
           <ul>
             {data.todos.map((t) => (
-              <li key={t.id}>{t.todoName}</li>
+              <li key={t.id}>-{t.title}</li>
             ))}
           </ul>
         </div>
       )}
+
+      <Link to="/exp3">← Powrót</Link>
     </div>
   );
 }
