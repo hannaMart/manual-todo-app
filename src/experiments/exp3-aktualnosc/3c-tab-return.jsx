@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { fakeFetchStale } from "../../../fakeServer/fakeAPI";
+import { fakeFetchFreshness } from "../../fakeServer/fakeAPI";
 
 const STALE_TIME_MS = 60000;
 
@@ -14,7 +14,7 @@ async function getDataWithFreshness() {
     return { data: cachedData, source: "cache (fresh)" };
   }
 
-  const result = await fakeFetchStale();
+  const result = await fakeFetchFreshness();
 
   cachedData = result;
   cachedAt = Date.now();

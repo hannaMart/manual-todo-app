@@ -1,23 +1,29 @@
 import { useEffect, useState } from "react";
-import { fakeDeleteTodo, fakeFetchTodos, resetFakeTodos } from "../fakeApi";
+import {
+  fakeDeletePb4Todo,
+  fakeFetchPb4Todos,
+  resetPb4Todos,
+} from "../../../fakeServer/fakeAPI";
 
 export default function ManualDeleteSetState() {
   const [todos, setTodos] = useState([]);
 
-  useEffect(() => {
-    resetFakeTodos();
-    loadTodos();
-  }, []);
+
 
   async function loadTodos() {
-    const data = await fakeFetchTodos();
+    const data = await fakeFetchPb4Todos();
     setTodos(data.todos);
   }
 
-  async function handleDelete(id) {
-    await fakeDeleteTodo(id);
+    useEffect(() => {
+    resetPb4Todos();
+    loadTodos();
+  }, []);
 
-    // ключ: обновляем UI без GET
+  async function handleDelete(id) {
+    await fakeDeletePb4Todo(id);
+
+    // обновляем UI локально без повторного GET
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   }
 
@@ -28,7 +34,8 @@ export default function ManualDeleteSetState() {
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
-            {todo.todoName}
+            {todo.title}
+
             <button
               onClick={() => handleDelete(todo.id)}
               style={{ marginLeft: "8px" }}

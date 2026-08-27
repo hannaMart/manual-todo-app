@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fakeFetchStale } from "../../fakeServer/fakeAPI";
+import { fakeFetchFreshness } from "../../fakeServer/fakeAPI";
 import { Link } from "react-router-dom";
 
 /**
@@ -32,7 +32,7 @@ export default function Exp3bStaleTimeManual() {
       return;
     }
 
-    fakeFetchStale().then((result) => {
+    fakeFetchFreshness().then((result) => {
       cachedData = result;
       cachedAt = Date.now();
       setData(result);

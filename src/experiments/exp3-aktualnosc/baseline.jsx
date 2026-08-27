@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fakeFetchNoFresh } from "../../fakeServer/fakeAPI";
+import { fakeFetchFreshness } from "../../fakeServer/fakeAPI";
 import { Link } from "react-router-dom";
 
 
@@ -7,7 +7,7 @@ export default function Exp3NoFreshness() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fakeFetchNoFresh().then((result) => {
+    fakeFetchFreshness().then((result) => {
       setData(result);
     });
   }, []); // только mount

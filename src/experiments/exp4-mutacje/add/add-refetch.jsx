@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
-import { fakeAddTodo, fakeFetchTodos, resetFakeTodos } from "../fakeApi";
+import { fakeAddPb4Todo, fakeFetchPb4Todos, resetPb4Todos } from "../../../fakeServer/fakeAPI";
 
 export default function ManualAddRefetch() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
 
   useEffect(() => {
-    resetFakeTodos();
+    resetPb4Todos();
     loadTodos();
   }, []);
 
   async function loadTodos() {
-    const data = await fakeFetchTodos();
+    const data = await fakeFetchPb4Todos();
     setTodos(data.todos);
   }
 
   async function handleAdd() {
-    await fakeAddTodo(newTodo);
+    await fakeAddPb4Todo(newTodo);
     setNewTodo("");
     await loadTodos();
   }
@@ -30,13 +30,14 @@ export default function ManualAddRefetch() {
         onChange={(e) => setNewTodo(e.target.value)}
         placeholder="Nowe zadanie"
       />
+
       <button onClick={handleAdd} style={{ marginLeft: "8px" }}>
         Dodaj
       </button>
 
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>{todo.todoName}</li>
+          <li key={todo.id}>{todo.title}</li>
         ))}
       </ul>
     </div>

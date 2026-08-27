@@ -13,7 +13,7 @@ export default function Exp3Aktualnosc() {
 
       <ul className="exp3__list">
         <li>
-          <Link to="/exp3/no-freshness">
+          <Link to="/exp3/baseline">
             3a — Отсутствие контроля актуальности данных
           </Link>
         </li>

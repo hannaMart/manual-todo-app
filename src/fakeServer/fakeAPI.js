@@ -1,5 +1,4 @@
-import { TODOS } from "./db";
-
+import { TODOS, PB4_TODOS } from "./db";
 
 export function simulateFetchTodos({ isFailure, delay = 800 } = {}) {
   return new Promise((resolve, reject) => {
@@ -48,25 +47,24 @@ export function fakeFetchTodosRace(filter) {
 
 //Exp3-aktualnosc;
 
-let counter = 0;
 
 /**
  * - counter: чтобы считать реальное число запросов/refetch
  * - fetchedAt: чтобы видеть "свежесть" данных
  * - delay: чтобы поведение было повторяемым
  */
-export function fakeFetchNoFresh({ delay = 600 } = {}) {
-  const requestId = ++counter;
-  const startedAt = Date.now();
+let exp3Counter = 0;
 
-  console.log(`[PB3] request #${requestId} START (delay=${delay}ms)`);
+export function fakeFetchFreshness({ delay = 600 } = {}) {
+  const requestId = ++exp3Counter;
+
+  console.log(`[PB3] request #${requestId} START`);
 
   return new Promise((resolve) => {
     setTimeout(() => {
       const fetchedAt = new Date().toISOString();
-      const tookMs = Date.now() - startedAt;
 
-      console.log(`[PB3] request #${requestId} END (+${tookMs}ms) fetchedAt=${fetchedAt}`);
+      console.log(`[PB3] request #${requestId} END`);
 
       resolve({
         requestId,
@@ -78,34 +76,67 @@ export function fakeFetchNoFresh({ delay = 600 } = {}) {
 }
 
 
-//Exp3-aktualnoscB-stale);
+// Exp4 — 4a
 
-let counter1 = 0;
+// Exp4 — Mutacje
 
-/**
- * PB3 fake fetch:
- * - counter1: чтобы считать реальное число запросов/refetch
- * - fetchedAt: чтобы видеть "свежесть" данных
- * - delay: чтобы поведение было повторяемым
- */
-export function fakeFetchStale({ delay = 600 } = {}) {
-  const requestId = ++counter1;
-  const startedAt = Date.now();
+let pb4TodosDb = PB4_TODOS.map((todo) => ({ ...todo }));
+let exp4RequestCounter = 0;
 
-  console.log(`[PB3] request #${requestId} START (delay=${delay}ms)`);
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const fetchedAt = new Date().toISOString();
-      const tookMs = Date.now() - startedAt;
+export function resetPb4Todos() {
+  pb4TodosDb = PB4_TODOS.map((todo) => ({ ...todo }));
+  exp4RequestCounter = 0;
+}
 
-      console.log(`[PB3] request #${requestId} END (+${tookMs}ms) fetchedAt=${fetchedAt}`);
+export async function fakeFetchPb4Todos({ delay = 600 } = {}) {
+  const requestId = ++exp4RequestCounter;
 
-      resolve({
-        requestId,
-        fetchedAt,
-        todos: TODOS,
-      });
-    }, delay);
-  });
+  console.log(`[PB4][GET] #${requestId}`);
+
+  await wait(delay);
+
+  return {
+    requestId,
+    todos: pb4TodosDb.map((todo) => ({ ...todo })),
+  };
+}
+
+export async function fakeAddPb4Todo(title, { delay = 600 } = {}) {
+  const requestId = ++exp4RequestCounter;
+
+  console.log(`[PB4][POST] #${requestId}`);
+
+  await wait(delay);
+
+  const newTodo = {
+    id: Math.max(0, ...pb4TodosDb.map((todo) => todo.id)) + 1,
+    title,
+    completed: false,
+  };
+
+  pb4TodosDb = [...pb4TodosDb, newTodo];
+
+  return {
+    requestId,
+    todo: { ...newTodo },
+  };
+}
+
+export async function fakeDeletePb4Todo(id, { delay = 600 } = {}) {
+  const requestId = ++exp4RequestCounter;
+
+  console.log(`[PB4][DELETE] #${requestId}`);
+
+  await wait(delay);
+
+  pb4TodosDb = pb4TodosDb.filter((todo) => todo.id !== id);
+
+  return {
+    requestId,
+    deletedId: id,
+  };
 }
