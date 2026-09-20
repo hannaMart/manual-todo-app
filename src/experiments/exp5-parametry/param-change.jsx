@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { fakeFetchTodos } from "./fakeFetchTodos";
+import { fakeFetchPb5Todos } from "../../fakeServer/fakeAPI";
 
 export default function Exp5ParamChange() {
   const [filter, setFilter] = useState("all");
@@ -12,7 +12,7 @@ export default function Exp5ParamChange() {
 
     setLoading(true);
 
-    fakeFetchTodos(filter, 700).then((result) => {
+    fakeFetchPb5Todos(filter, 700).then((result) => {
       if (ignore) return;
       setData(result);
       setLoading(false);

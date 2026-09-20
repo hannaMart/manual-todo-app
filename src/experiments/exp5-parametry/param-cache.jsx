@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { fakeFetchTodos } from "./fakeFetchTodos";
+import { fakeFetchPb5Todos } from "../../fakeServer/fakeAPI";
 
 export default function Exp5ParamCache() {
   const [filter, setFilter] = useState("all");
@@ -11,6 +11,7 @@ export default function Exp5ParamCache() {
   useEffect(() => {
     if (cache[filter]) {
       setData(cache[filter]);
+      setLoading(false);
       return;
     }
 
@@ -18,7 +19,7 @@ export default function Exp5ParamCache() {
 
     setLoading(true);
 
-    fakeFetchTodos(filter, 700).then((result) => {
+    fakeFetchPb5Todos(filter, 700).then((result) => {
       if (ignore) return;
 
       setCache((prev) => ({
@@ -37,15 +38,27 @@ export default function Exp5ParamCache() {
 
   return (
     <div className="exp5">
-      <h2 className="exp5__title">5c — Использование кэша (manual)</h2>
+      <h2 className="exp5__title">
+        5b — Использование кэша (manual)
+      </h2>
 
       <p className="exp5__desc">
         При повторном выборе уже использованного фильтра данные берутся из
-        локального кэша компонента без нового HTTP-запроса.
+        локального кэша компонента без нового запроса.
       </p>
 
-      <div style={{ display: "flex", gap: "10px", marginBottom: "16px", flexWrap: "wrap" }}>
-        <button onClick={() => setFilter("all")} disabled={filter === "all"}>
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          marginBottom: "16px",
+          flexWrap: "wrap",
+        }}
+      >
+        <button
+          onClick={() => setFilter("all")}
+          disabled={filter === "all"}
+        >
           all
         </button>
 
@@ -70,7 +83,9 @@ export default function Exp5ParamCache() {
 
       <p>
         <strong>Кэшированные фильтры:</strong>{" "}
-        {Object.keys(cache).length > 0 ? Object.keys(cache).join(", ") : "нет"}
+        {Object.keys(cache).length > 0
+          ? Object.keys(cache).join(", ")
+          : "нет"}
       </p>
 
       {loading && <p>Загрузка...</p>}
@@ -88,7 +103,8 @@ export default function Exp5ParamCache() {
           <ul>
             {data.items.map((todo) => (
               <li key={todo.id}>
-                {todo.title} — {todo.completed ? "completed" : "active"}
+                {todo.title} —{" "}
+                {todo.completed ? "completed" : "active"}
               </li>
             ))}
           </ul>
@@ -99,12 +115,3 @@ export default function Exp5ParamCache() {
     </div>
   );
 }
-
-// Смысл: вручную сделать кэш по параметру и посмотреть, что при возврате к уже использованному фильтру новый запрос не нужен.
-// Этот вариант специально показывает ручной кэш, чтобы потом было с чем сравнивать TanStack Query.
-
-// То есть логика такая:
-
-// первый раз all → идёт запрос
-// потом active → идёт запрос
-// потом снова all → данные уже из кэша, без нового запроса
