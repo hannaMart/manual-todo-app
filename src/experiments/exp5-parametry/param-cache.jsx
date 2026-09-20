@@ -4,31 +4,28 @@ import { fakeFetchPb5Todos } from "../../fakeServer/fakeAPI";
 
 export default function Exp5ParamCache() {
   const [filter, setFilter] = useState("all");
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [cache, setCache] = useState({});
 
+  // Данные для текущего фильтра
+  const data = cache[filter] ?? null;
+  const loading = !data;
+
   useEffect(() => {
+    // Если данные уже есть в кэше, запрос не выполняется
     if (cache[filter]) {
-      setData(cache[filter]);
-      setLoading(false);
       return;
     }
 
     let ignore = false;
 
-    setLoading(true);
-
     fakeFetchPb5Todos(filter, 700).then((result) => {
       if (ignore) return;
 
+      // Сохраняем результат в кэше
       setCache((prev) => ({
         ...prev,
         [filter]: result,
       }));
-
-      setData(result);
-      setLoading(false);
     });
 
     return () => {
