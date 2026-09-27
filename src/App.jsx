@@ -27,6 +27,11 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
 
+// ===================== EXP1 =====================
+import Exp1Pobieranie from "./experiments/exp1-pobieranie/index-exp1.jsx";
+import Exp1Baseline from "./experiments/exp1-pobieranie/baseline.jsx";
+import Exp1Scaling from "./experiments/exp1-pobieranie/scaling.jsx";
+
 // ===================== EXP2 =====================
 import Exp2 from "./experiments/exp2-synchronizacja/index-sync.jsx";
 
@@ -38,8 +43,6 @@ import Exp2BackIndex from "./experiments/exp2-synchronizacja/background/index-ba
 import Exp2Back from "./experiments/exp2-synchronizacja/background/exp2-background.jsx";
 import Exp2BackVisibility from "./experiments/exp2-synchronizacja/background/exp2-background-visibility.jsx";
 import Exp2BackVisibilityDelayed from "./experiments/exp2-synchronizacja/background/exp2-background-visibility-delayed.jsx";
-import Exp2BackVisibilityDelayedProblem from "./experiments/exp2-synchronizacja/background/exp2-background-visibility-delayed-problem.jsx";
-import Exp2BackVisibilityDelayedPredictability from "./experiments/exp2-synchronizacja/background/exp2-background-visibility-delayed-predictability.jsx";
 
 import Exp2ErrorsIndex from "./experiments/exp2-synchronizacja/errors/index-errors.jsx";
 import Exp2Errors from "./experiments/exp2-synchronizacja/errors/exp2-errors";
@@ -88,6 +91,11 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home />} />
 
+      {/* ===== EXP1 ===== */}
+      <Route path="/exp1" element={<Exp1Pobieranie />} />
+      <Route path="/exp1/baseline" element={<Exp1Baseline />} />
+      <Route path="/exp1/scaling" element={<Exp1Scaling />} />
+
       {/* ===== EXP2 ===== */}
       <Route path="/exp2" element={<Exp2 />} />
 
@@ -104,14 +112,6 @@ export default function App() {
       <Route
         path="/exp2/background/visibility-delayed"
         element={<Exp2BackVisibilityDelayed />}
-      />
-      <Route
-        path="/exp2/background/visibility-delayed-problem"
-        element={<Exp2BackVisibilityDelayedProblem />}
-      />
-      <Route
-        path="/exp2/background/visibility-delayed-predictability"
-        element={<Exp2BackVisibilityDelayedPredictability />}
       />
 
       <Route path="/exp2/errors" element={<Exp2ErrorsIndex />} />
@@ -170,16 +170,6 @@ export default function App() {
       <Route path="/exp6/update" element={<Exp6AktualizacjaIndex />}/>
       <Route path="/exp6/update/update-props" element={<Exp6UpdateProps />}/>
       <Route path="/exp6/update/update-context" element={<Exp6UpdateContext />}/>
-
-
-
-      {/* placeholders */}
-
-      <Route
-        path="/exp1"
-        element={<div className="exp-btn">Exp1 — позже</div>}
-      />
-
 
 
       <Route path="*" element={<Navigate to="/" replace />} />
