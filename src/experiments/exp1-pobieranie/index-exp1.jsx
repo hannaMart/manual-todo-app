@@ -1,34 +1,34 @@
+
 import { Link } from "react-router-dom";
 
 export default function Exp1Pobieranie() {
   return (
     <div className="exp1">
       <h2 className="exp1__title">
-        Эксперимент 1 — Получение server-state
+        PB1 — Pobieranie danych serwerowych
       </h2>
-
-      <p className="exp1__desc">
-        Эксперимент посвящён анализу количества и повторяемости HTTP-запросов
-        при получении одних и тех же серверных данных в разных сценариях
-        React-приложения.
-      </p>
 
       <ul className="exp1__list">
         <li>
           <Link to="/exp1/baseline">
-            Базовое получение данных
+            Baseline — pobieranie danych przez jeden komponent
           </Link>
         </li>
 
         <li>
           <Link to="/exp1/scaling">
-            Масштабирование количества компонентов
+            Scaling — 10 niezależnych komponentów
           </Link>
         </li>
 
+        <li>
+          <Link to="/exp1/scaling-shared">
+            Scaling Shared — wspólne pobieranie danych (props)
+          </Link>
+        </li>
       </ul>
 
-      <Link to="/">← Назад</Link>
+      <Link to="/">← Wróć</Link>
     </div>
   );
 }

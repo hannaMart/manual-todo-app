@@ -14,16 +14,9 @@ export default function Exp1Baseline() {
 
   return (
     <div className="exp1">
-      <h2>Базовое получение данных — Manual</h2>
-
-      <p>
-        Один компонент получает server-state при монтировании с помощью
-        useEffect, fetch и useState.
-      </p>
-
-      <p>Todos: {todos.length}</p>
-
-      <Link to="/exp1">← Назад</Link>
+      <h2>Pobieranie danych — jeden komponent</h2>
+      <p>Liczba zadań: {todos.length}</p>
+      <Link to="/exp1">← Wróć</Link>
     </div>
   );
 }

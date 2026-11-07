@@ -32,6 +32,9 @@ import Exp1Pobieranie from "./experiments/exp1-pobieranie/index-exp1.jsx";
 import Exp1Baseline from "./experiments/exp1-pobieranie/baseline.jsx";
 import Exp1Scaling from "./experiments/exp1-pobieranie/scaling.jsx";
 
+import Exp1ScalingShared from "./experiments/exp1-pobieranie/scaling-shared.jsx";
+
+
 // ===================== EXP2 =====================
 import Exp2 from "./experiments/exp2-synchronizacja/index-sync.jsx";
 
@@ -88,6 +91,8 @@ import Exp6UpdateContext from "./experiments/exp6-koordynacja/update/update-cont
 
 export default function App() {
   return (
+    <>
+    <header className="app-header">Manual</header>
     <Routes>
       <Route path="/" element={<Home />} />
 
@@ -95,6 +100,12 @@ export default function App() {
       <Route path="/exp1" element={<Exp1Pobieranie />} />
       <Route path="/exp1/baseline" element={<Exp1Baseline />} />
       <Route path="/exp1/scaling" element={<Exp1Scaling />} />
+      
+<Route
+  path="/exp1/scaling-shared"
+  element={<Exp1ScalingShared />}
+/>
+
 
       {/* ===== EXP2 ===== */}
       <Route path="/exp2" element={<Exp2 />} />
@@ -174,5 +185,6 @@ export default function App() {
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    </>
   );
 }
