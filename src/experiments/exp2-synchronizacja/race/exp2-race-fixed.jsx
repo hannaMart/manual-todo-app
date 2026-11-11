@@ -30,16 +30,18 @@ export default function Exp2Race() {
 
   return (
     <div style={{ padding: 16 }}>
-      <h2>Exp2 — race condition (manual, fixed)</h2>
+      <h2>Exp2 — race condition (fixed)</h2>
 
       <div style={{ marginBottom: 12 }}>
-        <button onClick={() => setFilter("all")}>all</button>
-        <button onClick={() => setFilter("active")}>active</button>
-        <button onClick={() => setFilter("completed")}>completed</button>
+      <div style={{ marginBottom: 12 }}>
+<button className={filter === "all" ? "active" : ""} onClick={() => setFilter("all")}>all</button>
+<button className={filter === "active" ? "active" : ""} onClick={() => setFilter("active")}>active</button>
+<button className={filter === "completed" ? "active" : ""} onClick={() => setFilter("completed")}>completed</button>
+      </div>
       </div>
 
       <p>
-        <strong>Текущий filter:</strong> {filter}
+        <strong>Aktywny filtr:</strong> {filter}
       </p>
 
       {loading && <p>Loading…</p>}
@@ -47,7 +49,7 @@ export default function Exp2Race() {
       {data && (
         <div>
           <p>
-            Ответ для filter: <b>{data.filter}</b> (delay: {data.delay} ms)
+            Odpowiedż dla filtra: <b>{data.filter}</b> (delay: {data.delay} ms)
           </p>
           <ul>
             {data.items.map((item) => (
@@ -57,7 +59,7 @@ export default function Exp2Race() {
         </div>
       )}
 
-      <Link to="/exp2/race">← Powrót</Link>
+      <Link to="/exp2/race">← Wróć</Link>
     </div>
   );
 }

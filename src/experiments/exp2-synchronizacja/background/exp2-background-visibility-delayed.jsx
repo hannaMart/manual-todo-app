@@ -1,58 +1,84 @@
+
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { simulateFetchTodos } from "../../../fakeServer/fakeAPI";
 
 export default function Exp2BackgroundVisibilityDelayed() {
-  const [data, setData] = useState({
-    version: 1,
-    updatedAt: new Date().toLocaleTimeString(),
-  });
-
-  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [updatedAt, setUpdatedAt] = useState("—");
 
   useEffect(() => {
-    let timeoutId;
+    let active = true;
 
-    const onVisibility = () => {
-      if (document.visibilityState !== "visible") return;
-
+    const loadData = async (delay) => {
       setLoading(true);
 
-      // намеренная очистка UI
-      setData(null);
+      // Poprzednie dane pozostają widoczne podczas aktualizacji
+      const todos = await simulateFetchTodos({ delay });
 
-      timeoutId = setTimeout(() => {
-        setData({
-          version: (Math.random() * 100).toFixed(0),
-          updatedAt: new Date().toLocaleTimeString(),
-        });
-        setLoading(false);
-      }, 1500);
+      if (!active) return;
+
+      setData({
+        todos,
+        version: Math.floor(Math.random() * 100) + 1
+      });
+
+      setUpdatedAt(new Date().toLocaleTimeString("pl-PL"));
+      setLoading(false);
+    };
+
+    // Pierwsze pobranie danych
+    loadData(0);
+
+    const onVisibility = () => {
+      if (document.visibilityState === "visible") {
+        loadData(3000);
+      }
     };
 
     document.addEventListener("visibilitychange", onVisibility);
+
     return () => {
+      active = false;
       document.removeEventListener("visibilitychange", onVisibility);
-      if (timeoutId) clearTimeout(timeoutId);
     };
   }, []);
 
   return (
     <div className="page">
-      <h2>Background — visibility (manual, delayed)</h2>
+      <h2>Background — Visibility + Delayed</h2>
 
       <p>
-        Добавлена задержка, чтобы увидеть,
-        что происходит с UI во время обновления.
+        Aktualizacja danych po powrocie do karty
+        z opóźnieniem 3000 ms.
       </p>
 
       <div className="card">
-        <div><b>Loading:</b> {loading ? "true" : "false"}</div>
+        <div>
+          <b>Aktualizacja w toku:</b> {loading ? "Tak" : "Nie"}
+        </div>
+
+        <div>
+          <b>Wersja odpowiedzi:</b> {data?.version ?? "—"}
+        </div>
+
+        <div>
+          <b>Ostatnia aktualizacja:</b> {updatedAt}
+        </div>
+
+        {loading && <p><i>Aktualizowanie danych…</i></p>}
 
         <hr />
 
-        <div><b>Версия:</b> {data ? data.version : "—"}</div>
-        <div><b>Обновлено:</b> {data ? data.updatedAt : "—"}</div>
+        <b>Lista zadań:</b>
+        <ul>
+          {data?.todos.map((todo) => (
+            <li key={todo.id}>{todo.title}</li>
+          ))}
+        </ul>
 
-        {loading && <p><i>Обновление…</i></p>}
+        <Link to="/exp2">← Wróć</Link>
       </div>
     </div>
   );

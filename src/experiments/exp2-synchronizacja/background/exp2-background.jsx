@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function BgBasic() {
   // реальные часы (всегда идут)
-  const [realTime, setRealTime] = useState(
-    new Date().toLocaleTimeString()
-  );
+  const [realTime, setRealTime] = useState(new Date().toLocaleTimeString());
 
   // снимок для эксперимента (меняется только по триггеру)
   const [snapshotTime, setSnapshotTime] = useState("");
@@ -25,16 +24,18 @@ export default function BgBasic() {
     <div className="page">
       {/* Реальные часы */}
       <div style={{ marginBottom: 16 }}>
-        <strong>Реальное время:</strong> {realTime}
+        <strong>Aktualny czas:</strong> {realTime}
       </div>
 
       <hr />
 
-      {/* Блок эксперимента */}
-      <h2>Background — base</h2>
+      <h2>Background — Base</h2>
       <p>
-        Снимок времени (UI): <b>{snapshotTime}</b>
+        Czas ostatniego odczytu: <b>{snapshotTime}</b>
       </p>
+      <br/>
+
+      <Link to="/exp2">← Wróć</Link>
     </div>
   );
 }
