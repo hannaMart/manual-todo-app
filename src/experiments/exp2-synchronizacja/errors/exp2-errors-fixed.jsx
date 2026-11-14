@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { simulateFetchTodos } from "../../../fakeServer/fakeAPI";
+import { Link } from "react-router-dom";
 
 export default function Exp2Errors() {
   const [isFailure, setIsFailure] = useState(false);
@@ -26,7 +27,7 @@ export default function Exp2Errors() {
 
   return (
     <div className="page">
-      <h2>Exp2c — Errors / retry (manual)</h2>
+      <h2>Errors / retry (fixed)</h2>
 
       <label>
         <input
@@ -36,7 +37,7 @@ export default function Exp2Errors() {
         />
         Symuluj błąd zapytania
       </label>
-
+      <br />
       <button onClick={handleFetch} disabled={status === "loading"}>
         Fetch
       </button>
@@ -45,7 +46,7 @@ export default function Exp2Errors() {
 
       {status === "error" && (
         <div>
-          <div>Błąd: {errorMsg}</div>
+          <div style={{ color: "red" }}>Błąd: {errorMsg}</div>
           <button onClick={handleFetch}>Retry</button>
         </div>
       )}
@@ -57,6 +58,8 @@ export default function Exp2Errors() {
           ))}
         </ul>
       )}
+      <br />
+      <Link to="/exp2/errors">← Wróć</Link>
     </div>
   );
 }

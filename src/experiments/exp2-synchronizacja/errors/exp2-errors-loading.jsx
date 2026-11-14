@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { simulateFetchTodos } from "../../../fakeServer/fakeAPI";
+import { Link } from "react-router-dom";
 
 export default function Exp2ErrorsLoading() {
   const [fail1, setFail1] = useState(false);
@@ -82,7 +83,9 @@ export default function Exp2ErrorsLoading() {
           onChange={(e) => setFail1(e.target.checked)}
         />
         Symuluj błąd
-      </label><br /><br />
+      </label>
+      <br />
+      <br />
 
       <button onClick={startBug1}>Start</button>
       <button onClick={resetBug1}>Reset</button>
@@ -110,7 +113,7 @@ export default function Exp2ErrorsLoading() {
 
       <div>Status: {status2}</div>
       {status2 === "loading" && <div>Loading…</div>}
-      {status2 === "error" && <div>Błąd: {error2}</div>}
+      {status2 === "error" && <div style = {{color:"red"}}>Błąd: {error2}</div>}
       {status2 === "success" && data2 && (
         <ul>
           {data2.map((t) => (
@@ -118,6 +121,8 @@ export default function Exp2ErrorsLoading() {
           ))}
         </ul>
       )}
+      <br />
+      <Link to="/exp2">← Wróć</Link>
     </div>
   );
 }
