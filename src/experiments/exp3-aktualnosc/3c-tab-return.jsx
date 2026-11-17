@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fakeFetchFreshness } from "../../fakeServer/fakeAPI";
 
-const STALE_TIME_MS = 60000;
+const STALE_TIME_MS = 30000;
 
 let cachedData = null;
 let cachedAt = 0;
@@ -55,13 +55,26 @@ export default function Exp3TabReturn() {
 
   return (
     <div className="page">
-      <h2>PB3 – 3c – Актуальность при возврате на вкладку</h2>
+      <h2>3c. Aktualność danych po powrocie do karty przeglądarki</h2>
+      <p>
+        {" "}
+        <strong>Ostatnie pobranie:</strong>{" "}
+        {new Date(data.fetchedAt).toLocaleTimeString("pl-PL", {
+          timeZone: "Europe/Warsaw",
+          hour12: false,
+        })}
+      </p>
 
-      <p><strong>Source:</strong> {source}</p>
-      <p><strong>Fetched at:</strong> {data.fetchedAt}</p>
-      <p><strong>Request ID:</strong> {data.requestId}</p>
+      <p>
+        <strong>Numer żądania:</strong> {data.requestId}
+      </p>
+      <p>
+        <strong>Źródło danych:</strong> {source}
+      </p>
 
-      <p><strong>Todos:</strong></p>
+      <p>
+        <strong>Todos:</strong>
+      </p>
       <ul>
         {data.todos.map((t) => (
           <li key={t.id}>{t.title}</li>

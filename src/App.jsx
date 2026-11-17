@@ -57,6 +57,7 @@ import Exp3 from "./experiments/exp3-aktualnosc/index-exp3.jsx";
 import Exp3Baseline from "./experiments/exp3-aktualnosc/baseline.jsx";
 import Exp3StaleTime from "./experiments/exp3-aktualnosc/3b-page-return.jsx";
 import Exp3ReturnAfterBreak from "./experiments/exp3-aktualnosc/3c-tab-return.jsx";
+import Exp3Polling from "./experiments/exp3-aktualnosc/3d-polling.jsx";
 
 // ===================== EXP4 =====================
 import Exp4 from "./experiments/exp4-mutacje/index-exp4.jsx";
@@ -144,6 +145,7 @@ export default function App() {
         path="/exp3/tab-return"
         element={<Exp3ReturnAfterBreak />}
       />
+      <Route path="/exp3/polling" element={<Exp3Polling />} />
 
       {/* ===== EXP4 ===== */}
       <Route path="/exp4" element={<Exp4 />} />
