@@ -29,7 +29,7 @@ export default function ManualAddSetState() {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>PB4 — Mutacje: Add — setState</h2>
+      <h2>PB4 — 4a Add (manual, setState)</h2>
 
       <input
         value={newTodo}
