@@ -23,7 +23,7 @@ export default function ManualAddRefetch() {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>PB4 — 4a Add (manual)</h2>
+      <h2>PB4 — Mutacje: Add — refetch</h2>
 
       <input
         value={newTodo}
