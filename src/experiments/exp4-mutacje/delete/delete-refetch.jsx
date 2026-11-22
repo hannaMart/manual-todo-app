@@ -25,7 +25,7 @@ export default function ManualDeleteRefetch() {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>PB4 — 4b Delete (manual, refetch)</h2>
+      <h2>PB4 — Mutacje: Delete — refetch</h2>
 
       <ul>
         {todos.map((todo) => (

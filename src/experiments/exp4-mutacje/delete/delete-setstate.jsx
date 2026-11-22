@@ -29,8 +29,8 @@ export default function ManualDeleteSetState() {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>PB4 — 4b Delete (manual, setState)</h2>
-
+      <h2>PB4 — Mutacje: Delete — setState</h2>
+      
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
