@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fakeFetchPb5Todos } from "../../fakeServer/fakeAPI";
@@ -36,13 +37,14 @@ export default function Exp5ParamCache() {
   return (
     <div className="exp5">
       <h2 className="exp5__title">
-        5b — Использование кэша (manual)
+        PB5b — Ponowne wykorzystanie danych (Cache)
       </h2>
 
-      <p className="exp5__desc">
-        При повторном выборе уже использованного фильтра данные берутся из
-        локального кэша компонента без нового запроса.
-      </p>
+      {/* <p className="exp5__desc">
+        Przy ponownym wyborze wcześniej używanego filtra
+        dane są pobierane z lokalnej pamięci podręcznej
+        komponentu, bez wykonywania nowego żądania.
+      </p> */}
 
       <div
         style={{
@@ -75,26 +77,26 @@ export default function Exp5ParamCache() {
       </div>
 
       <p>
-        <strong>Текущий фильтр:</strong> {filter}
+        <strong>Aktualny filtr:</strong> {filter}
       </p>
 
       <p>
-        <strong>Кэшированные фильтры:</strong>{" "}
+        <strong>Filtry zapisane w pamięci podręcznej:</strong>{" "}
         {Object.keys(cache).length > 0
           ? Object.keys(cache).join(", ")
-          : "нет"}
+          : "brak"}
       </p>
 
-      {loading && <p>Загрузка...</p>}
+      {loading && <p>Ładowanie...</p>}
 
       {data && (
         <>
           <p>
-            <strong>Номер запроса:</strong> {data.requestId}
+            <strong>Numer żądania:</strong> {data.requestId}
           </p>
 
           <p>
-            <strong>Количество элементов:</strong> {data.total}
+            <strong>Liczba elementów:</strong> {data.total}
           </p>
 
           <ul>
@@ -108,7 +110,7 @@ export default function Exp5ParamCache() {
         </>
       )}
 
-      <Link to="/exp5">← Назад</Link>
+      <Link to="/exp5">← Wróć</Link>
     </div>
   );
 }

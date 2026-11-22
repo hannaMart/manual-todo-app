@@ -25,32 +25,35 @@ export default function Exp5ParamChange() {
 
   return (
     <div className="exp5">
-      <h2 className="exp5__title">5a — Изменение параметров запроса</h2>
-
+      <h2 className="exp5__title">PB5a — Zmiana parametrów zapytania</h2>
+      {/* 
       <p className="exp5__desc">
-        Ручная реализация: при изменении фильтра useEffect выполняет новый
-        запрос и обновляет состояние компонента.
-      </p>
+        Przy zmianie filtra useEffect uruchamia nowe pobieranie
+        danych i aktualizuje stan komponentu. Dane nie są
+        zapisywane w pamięci podręcznej.
+      </p> */}
 
       <div style={{ display: "flex", gap: "10px", marginBottom: "16px" }}>
-        <button onClick={() => setFilter("all")}>all</button>
+        <button onClick={() => setFilter("all")} disabled={filter === "all"}>
+          all
+        </button>
         <button onClick={() => setFilter("active")}>active</button>
         <button onClick={() => setFilter("completed")}>completed</button>
       </div>
 
       <p>
-        <strong>Текущий фильтр:</strong> {filter}
+        <strong>Aktualny filtr:</strong> {filter}
       </p>
 
-      {loading && <p>Загрузка...</p>}
+      {loading && <p>Ładowanie...</p>}
 
       {data && (
         <>
           <p>
-            <strong>Номер запроса:</strong> {data.requestId}
+            <strong>Numer żądania:</strong> {data.requestId}
           </p>
           <p>
-            <strong>Получено элементов:</strong> {data.total}
+            <strong>Liczba elementów:</strong> {data.total}
           </p>
 
           <ul>
@@ -63,10 +66,11 @@ export default function Exp5ParamChange() {
         </>
       )}
 
-      <Link to="/exp5">← Назад</Link>
+      <Link to="/exp5">← Powrót</Link>
     </div>
   );
 }
+
 /* 
 Что здесь важно
 1. filter
